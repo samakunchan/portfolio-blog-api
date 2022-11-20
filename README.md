@@ -1,5 +1,5 @@
 [![Owner](https://img.shields.io/badge/Owner-Samakunchan%20Technology-blue)](https://samakunchan-technology.com/)
-[![API](https://img.shields.io/badge/API-v0.6.0-brightgreen)](https://samakunchan-technology.com/)
+[![API](https://img.shields.io/badge/API-v0.8.0-brightgreen)](https://samakunchan-technology.com/)
 ![GitHub watchers](https://img.shields.io/github/watchers/samakunchan/portfolio-blog-api)
 ![GitHub repo size](https://img.shields.io/github/repo-size/samakunchan/portfolio-blog-api)
 # Blog Portfolio API

@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\PortfolioRepository;
 use App\Traits\TraitSlug;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,9 +18,10 @@ class Portfolio
     use TraitSlug;
 
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
+    #[ApiProperty(identifier: false)]
     private ?int $id = null;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: "string", length: 255, unique: true)]
     #[Assert\NotBlank(message: "Le champ ne doit pas être vide.")]
     #[Assert\Length(min: 3, minMessage: "Le titre doit avoir au moins {{ limit }} caractères.")]
     #[Assert\Type("string")]
@@ -38,7 +39,7 @@ class Portfolio
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: "portfolios", cascade: ["persist", "remove"])]
     #[Assert\Type("object")]
-    private ArrayCollection $tags;
+    private Collection $tags;
 
     #[ORM\OneToOne(targetEntity: Document::class, cascade: ["persist", "remove"])]
     #[Assert\Type("object")]

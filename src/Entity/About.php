@@ -7,7 +7,6 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AboutRepository;
 use App\Traits\Timestapable;
 use App\Traits\TraitSlug;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
