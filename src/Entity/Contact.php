@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ContactRepository;
+use App\Traits\Timestapable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -43,7 +44,7 @@ class Contact
 
     #[ORM\OneToMany(mappedBy: "contact", targetEntity: Document::class, cascade: ["persist", "remove"])]
     #[Assert\Type("object")]
-    private ArrayCollection $document;
+    private Collection $document;
 
     #[ORM\Column(type: "text")]
     #[Assert\NotBlank(message: "Le champ ne doit pas être vide.")]
@@ -51,7 +52,7 @@ class Contact
     #[Assert\Type("string")]
     private string $message;
 
-    #[Assert\Type("object")]
+    #[Assert\Type("bool")]
     #[ORM\Column(type: "boolean")]
     private bool $readed;
 

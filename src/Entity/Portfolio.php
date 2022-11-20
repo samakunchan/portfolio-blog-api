@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\PortfolioRepository;
+use App\Traits\TraitSlug;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -32,7 +34,7 @@ class Portfolio
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: "portfolios")]
     #[Assert\Type("object")]
-    private ?Category $category;
+    private ?Category $category = null;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: "portfolios", cascade: ["persist", "remove"])]
     #[Assert\Type("object")]

@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CGVRepository;
+use App\Traits\TraitSlug;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource]
-#[ORM\Entity(repositoryClass: CGVRepository::class)]
+#[ORM\Entity(repositoryClass: CGVRepository::class), ORM\Table(name: "cgv")]
 class CGV
 {
     use TraitSlug;
@@ -17,7 +19,7 @@ class CGV
     private ?int $id = null;
 
     #[ORM\Column(type: "string", length: 255)]
-    #[Assert\IdenticalTo("Conditions générales de vente", message: "Le champ doit être identique à {{ compared_value_type }} {{ compared_value }}")]
+    #[Assert\IdenticalTo("Conditions générales de vente", message: "Le champ doit être identique à {{ compared_value_type }} {{ compared_value }}.")]
     #[Assert\NotBlank(message: "Le champ ne doit pas être vide.")]
     #[Assert\Length(min: 6, minMessage: "Le titre doit avoir au moins {{ limit }} caractères.")]
     #[Assert\Type("string")]

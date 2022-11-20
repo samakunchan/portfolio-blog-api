@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Entity;
+namespace App\Traits;
 
 use ApiPlatform\Metadata\ApiProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 trait TraitSlug
 {
     #[ORM\Column(type: "string", length: 255)]

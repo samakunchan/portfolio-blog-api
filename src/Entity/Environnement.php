@@ -4,12 +4,27 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use App\Repository\EnvironnementRepository;
+use App\Traits\TraitSlug;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+//#[ApiResource(
+//    operations: [
+//        new Patch(inputFormats: ['json' => ['application/json']]), // Sans cette précision, le format pour le PATCH c'est application/merge-patch+json
+//        new GetCollection(),
+//        new Post(),
+//    ],
+//    formats: [
+//        'jsonld',
+//        'csv' => ['text/csv']
+//    ])
+//]
 #[ApiResource]
 #[ORM\Entity(repositoryClass: EnvironnementRepository::class)]
 class Environnement
@@ -22,9 +37,9 @@ class Environnement
 
     #[ORM\Column(type: "string", length: 255, unique: true)]
     #[Assert\NotBlank(message: "Le champ ne doit pas être vide.")]
-    #[Assert\Length(min: 3, minMessage: "Le type doit avoir au moins {{ limit }} caractères.")]
+    #[Assert\Length(min: 3, minMessage: "Le titre doit avoir au moins {{ limit }} caractères.")]
     #[Assert\Type("string")]
-    private string $type;
+    private string $title;
 
     #[ORM\OneToMany(mappedBy: 'environnement', targetEntity: Category::class, cascade: ["persist", "remove"], orphanRemoval: true)]
     private Collection $categories;
@@ -39,15 +54,15 @@ class Environnement
         return $this->id;
     }
 
-    public function getType(): string
+    public function getTitle(): string
     {
-        return $this->type;
+        return $this->title;
     }
 
-    public function setType(string $type): self
+    public function setTitle(string $title): self
     {
-        $this->type = $type;
-        $this->setSlug($this->type);
+        $this->title = $title;
+        $this->setSlug($this->title);
         return $this;
     }
 
