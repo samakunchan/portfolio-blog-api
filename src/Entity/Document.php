@@ -4,11 +4,11 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\DocumentRepository;
+use App\Traits\Timestapable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ApiResource]
 #[ORM\Entity(repositoryClass: DocumentRepository::class)]
 class Document
 {

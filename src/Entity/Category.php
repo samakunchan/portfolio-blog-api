@@ -5,8 +5,10 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CategoryRepository;
+use App\Traits\TraitSlug;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -22,9 +24,9 @@ class Category
 
     #[ORM\Column(type: "string", length: 255)]
     #[Assert\NotBlank(message: "Le champ ne doit pas être vide.")]
-    #[Assert\Length(min: 3, minMessage: "Le type doit avoir au moins {{ limit }} caractères.")]
+    #[Assert\Length(min: 3, minMessage: "Le titre doit avoir au moins {{ limit }} caractères.")]
     #[Assert\Type("string")]
-    private ?string $type;
+    private ?string $title;
 
     #[ORM\Column(type: "text", nullable: true)]
     #[Assert\NotBlank(message: "Le champ ne doit pas être vide.")]
@@ -40,17 +42,17 @@ class Category
     #[ORM\OneToMany(mappedBy: "category", targetEntity: Portfolio::class, cascade: ["persist", "remove"], orphanRemoval: true)]
     #[Assert\Valid]
     #[Assert\Type("object")]
-    private ArrayCollection $portfolios;
+    private Collection $portfolios;
 
     #[ORM\OneToMany(mappedBy: "category", targetEntity: Blog::class)]
     #[Assert\Valid]
     #[Assert\Type("object")]
-    private ArrayCollection $blogs;
+    private Collection $blogs;
 
     #[ORM\OneToMany(mappedBy: "categories", targetEntity: Contact::class)]
     #[Assert\Valid]
     #[Assert\Type("object")]
-    private ArrayCollection $contacts;
+    private Collection $contacts;
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     #[Assert\Length(min: 6, minMessage: "Le code de l'icone doit avoir au moins {{ limit }} caractères.")]
@@ -69,15 +71,15 @@ class Category
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getTitle(): ?string
     {
-        return $this->type;
+        return $this->title;
     }
 
-    public function setType(string $type): self
+    public function setTitle(string $title): self
     {
-        $this->type = $type;
-        $this->setSlug($this->type);
+        $this->title = $title;
+        $this->setSlug($this->title);
         return $this;
     }
 

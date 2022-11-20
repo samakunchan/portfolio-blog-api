@@ -2,8 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AboutRepository;
+use App\Traits\Timestapable;
+use App\Traits\TraitSlug;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,6 +20,7 @@ class About
     public const DEFAULT_SLUG = 'a propos de moi';
 
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
+    #[ApiProperty(identifier: false)]
     private ?int $id = null;
 
     #[ORM\Column(type: "string", length: 255)]
@@ -47,7 +52,7 @@ class About
     public function setTitle(string $title): self
     {
         $this->title = $title;
-        $this->setSlug($this->title);
+        $this->setSlug($this::DEFAULT_SLUG);
         return $this;
     }
 

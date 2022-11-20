@@ -29,11 +29,11 @@ class Tag implements JsonSerializable
 
     #[ORM\ManyToMany(targetEntity: Portfolio::class, mappedBy: "tags", cascade: ["persist", "remove"])]
     #[Assert\Valid]
-    private ArrayCollection $portfolios;
+    private Collection $portfolios;
 
     #[ORM\ManyToMany(targetEntity: Blog::class, mappedBy: "tags", cascade: ["persist", "remove"])]
     #[Assert\Valid]
-    private ArrayCollection $blogs;
+    private Collection $blogs;
 
     public function __construct()
     {
@@ -59,7 +59,7 @@ class Tag implements JsonSerializable
     }
 
     /**
-     * @return Collection|Portfolio[]
+     * @return Collection
      */
     public function getPortfolios(): Collection
     {
@@ -87,7 +87,7 @@ class Tag implements JsonSerializable
     }
 
     /**
-     * @return Collection|Blog[]
+     * @return Collection
      */
     public function getBlogs(): Collection
     {
