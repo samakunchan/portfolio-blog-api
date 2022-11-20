@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\TagRepository;
+use App\Traits\TraitSlug;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag implements JsonSerializable
 {
+    use TraitSlug;
     /**
      * NUM_ITEMS sert à déterminer le nombre de post à afficher pour la pagination
      * Il est utiliser dans la méthode findBySearchQuery du BlogRepository
@@ -21,6 +24,7 @@ class Tag implements JsonSerializable
     public const NUM_ITEMS = 10;
 
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
+    #[ApiProperty(identifier: false)]
     private ?int $id = null;
 
     #[ORM\Column(type: "string", length: 255)]
@@ -54,6 +58,7 @@ class Tag implements JsonSerializable
     public function setName(string $name): self
     {
         $this->name = $name;
+        $this->setSlug($this->name);
 
         return $this;
     }

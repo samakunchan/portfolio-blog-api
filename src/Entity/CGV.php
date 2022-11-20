@@ -2,20 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CGVRepository;
 use App\Traits\TraitSlug;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource]
-#[ORM\Entity(repositoryClass: CGVRepository::class), ORM\Table(name: "cgv")]
+#[ORM\Entity(repositoryClass: CGVRepository::class)]
 class CGV
 {
     use TraitSlug;
 
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
+    #[ApiProperty(identifier: false)]
     private ?int $id = null;
 
     #[ORM\Column(type: "string", length: 255)]
