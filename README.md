@@ -1,7 +1,7 @@
-[![Owner](https://img.shields.io/badge/Owner-Samakunchan%20Technology-blue)](https://my-services.samakunchan.fr/)
-[![Owner](https://img.shields.io/badge/Blog--Portfolio--API-v0.3.0-orange)](https://my-services.samakunchan.fr/)
-![GitHub watchers](https://img.shields.io/github/watchers/samakunchan/blog-portfolio-api)
-![GitHub repo size](https://img.shields.io/github/repo-size/samakunchan/blog-portfolio-api)
+[![Owner](https://img.shields.io/badge/Owner-Samakunchan%20Technology-blue)](https://samakunchan-technology.com/)
+[![API](https://img.shields.io/badge/API-v0.10.0-brightgreen)](https://samakunchan-technology.com/)
+![GitHub watchers](https://img.shields.io/github/watchers/samakunchan/portfolio-blog-api)
+![GitHub repo size](https://img.shields.io/github/repo-size/samakunchan/portfolio-blog-api)
 # Blog Portfolio API
 
 API pour mon portfolio, créé avec API Platform. Le projet a été créé avec un skeleton vide. Les dépendances nécessaires seront ajoutés au fur et à mesure.
