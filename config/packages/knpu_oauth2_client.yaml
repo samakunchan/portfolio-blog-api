@@ -1,0 +1,9 @@
+knpu_oauth2_client:
+    clients:
+        keycloak:
+            type: keycloak
+            auth_server_url: https://localhost:8085
+            realm: 'PPG-Connect'
+            client_id: 'portfolio'
+            client_secret: 'FMwi4rr4HsTcCKKgnBT1or8LPlFZac5g'
+            redirect_route: security_oauth_keycloak_redirect
